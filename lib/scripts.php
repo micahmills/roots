@@ -102,3 +102,14 @@ function roots_google_analytics() { ?>
 if (GOOGLE_ANALYTICS_ID && (WP_ENV !== 'production' || !current_user_can('manage_options'))) {
   add_action('wp_footer', 'roots_google_analytics', 20);
 }
+
+/**
+/* LiveReload Script for Grunt.js
+**/
+if (in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'))) {
+	add_action('wp_enqueue_scripts', 'enqueue_livereload');
+	function enqueue_livereload() {
+	  wp_register_script('livereload', 'http://localhost:35729/livereload.js?snipver=1', null, false, true);
+	  wp_enqueue_script('livereload');
+	}
+}
